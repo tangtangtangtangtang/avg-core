@@ -1,7 +1,7 @@
 /**
  * @file        Container component
  * @author      Icemic Jia <bingfeng.web@gmail.com>
- * @copyright   2015-2016 Icemic Jia
+ * @copyright   2015-2017 Icemic Jia
  * @link        https://www.avgjs.org
  * @license     Apache License 2.0
  *
@@ -18,41 +18,29 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import createComponent from 'components/createComponent';
-import ContainerMixin from 'components/ContainerMixin';
-import NodeMixin from 'components/NodeMixin';
+import componentify from '../pixi/componentify';
+import { mountNode, updateNode, setValue, updateValue } from '../pixi/properties';
 import PixiContainer from 'classes/Sprite';
-import pixiPropTypes from './pixi/propTypes';
+import PropTypes from 'prop-types';
 
-const RawContainer = createComponent('RawContainer', ContainerMixin, NodeMixin, {
+const propTypes = {
 
+};
+
+export const Container = componentify('Container', {
   createNode() {
     this.node = new PixiContainer();
   },
   mountNode(props) {
-    // color, opacity, width, height, x, y, etc.
-    const layer = this.node;
+    const node = this.node;
 
-    layer.x = props.x || 0;
-    layer.y = props.y || 0;
-    layer.alpha = props.opactiy || 1;
+    mountNode(node, props);
 
-    return layer;
+    return node;
   },
   updateNode(prevProps, props) {
-    const layer = this.node;
+    const node = this.node;
 
-    layer.x = props.x || 0;
-    layer.y = props.y || 0;
-    layer.alpha = props.opactiy || 1;
-  },
-
-});
-
-export class Container extends React.PureComponent {
-  static propTypes = pixiPropTypes;
-  render() {
-    return React.createElement(RawContainer, this.props, this.props.children);
+    updateNode(node, prevProps, props);
   }
-}
+}, propTypes);

@@ -20,17 +20,21 @@
 
 import deepEqual from 'deep-equal';
 import Logger from 'core/logger';
-import createComponent from 'components/createComponent';
-import ContainerMixin from 'components/ContainerMixin';
-import NodeMixin from 'components/NodeMixin';
+import componentify from '../pixi/componentify';
 import { mountNode, updateNode, setValue, updateValue } from '../pixi/properties';
+import PropTypes from 'prop-types';
 
 import ParticleContainer from './ParticleContainer';
 
 const logger = Logger.create('Particle');
 
-const Particle = createComponent('Particle', ContainerMixin, NodeMixin, {
+const propTypes = {
+  art: PropTypes.object,
+  config: PropTypes.object,
+  interactiveChildren: PropTypes.bool
+};
 
+export const Particle = componentify('Particle', {
   createNode() {
     this.node = new ParticleContainer();
   },
@@ -54,6 +58,4 @@ const Particle = createComponent('Particle', ContainerMixin, NodeMixin, {
       node.init(props.art, props.config);
     }
   }
-});
-
-export default Particle;
+}, propTypes);

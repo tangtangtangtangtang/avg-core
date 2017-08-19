@@ -20,7 +20,7 @@
 
 import React from 'react';
 import core from 'core/core';
-import { Image } from './Image';
+import { Image } from './base/Image';
 import { Transition } from 'components/transition';
 import transition from 'plugins/transition';
 

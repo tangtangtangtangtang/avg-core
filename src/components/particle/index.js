@@ -18,6 +18,4 @@
  * limitations under the License.
  */
 
-import Particle from './Particle';
-
-export { Particle };
+export { Particle } from './Particle';

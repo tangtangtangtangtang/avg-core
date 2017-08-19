@@ -18,14 +18,11 @@
  * limitations under the License.
  */
 
-import createComponent from 'components/createComponent';
-import ContainerMixin from 'components/ContainerMixin';
-import NodeMixin from 'components/NodeMixin';
-import TransitionContainer from './TransitionContainer';
+import componentify from '../pixi/componentify';
 import { mountNode, updateNode } from '../pixi/properties';
+import TransitionContainer from './TransitionContainer';
 
-export const Transition = createComponent('Transition', ContainerMixin, NodeMixin, {
-
+export const Transition = componentify('Transition', {
   createNode() {
     this.node = new TransitionContainer();
   },
@@ -40,6 +37,5 @@ export const Transition = createComponent('Transition', ContainerMixin, NodeMixi
     const node = this.node;
 
     updateNode(node, prevProps, props);
-  },
-
+  }
 });

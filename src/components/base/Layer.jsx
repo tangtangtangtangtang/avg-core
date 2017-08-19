@@ -1,7 +1,7 @@
 /**
  * @file        Layer component
  * @author      Icemic Jia <bingfeng.web@gmail.com>
- * @copyright   2015-2016 Icemic Jia
+ * @copyright   2015-2017 Icemic Jia
  * @link        https://www.avgjs.org
  * @license     Apache License 2.0
  *
@@ -18,23 +18,35 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
 import core from 'core/core';
-import createComponent from 'components/createComponent';
-import ContainerMixin from 'components/ContainerMixin';
-import NodeMixin from 'components/NodeMixin';
+import componentify from '../pixi/componentify';
+import { mountNode, updateNode, setValue, updateValue } from '../pixi/properties';
 import PixiLayer from 'classes/Layer';
-import pixiPropTypes from './pixi/propTypes';
+import PropTypes from 'prop-types';
 
-const RawLayer = createComponent('RawLayer', ContainerMixin, NodeMixin, {
+const propTypes = {
+  // TODO: check: rename to alpha
+  // opacity: PropTypes.number,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  fillColor: PropTypes.number,
+  fillAlpha: PropTypes.number,
+  clip: PropTypes.bool,
+};
 
+export const Layer = componentify('Layer', {
   createNode() {
     this.node = new PixiLayer();
   },
-  mountNode(props) {
+  mountNode(_props) {
     // color, opacity, width, height, x, y, etc.
     const layer = this.node;
+    const renderer = core.getRenderer();
+    const props = {
+      width: renderer.width,
+      height: renderer.height,
+      ..._props,
+    };
 
     layer.setProperties(props);
     //  layer.x = props.x || 0;
@@ -42,32 +54,15 @@ const RawLayer = createComponent('RawLayer', ContainerMixin, NodeMixin, {
 
     return layer;
   },
-  updateNode(prevProps, props) {
+  updateNode(prevProps, _props) {
     const layer = this.node;
-
-    layer.setProperties(props);
-  },
-});
-
-export class Layer extends React.PureComponent {
-  static propTypes = {
-    ...pixiPropTypes,
-    // TODO: check: rename to alpha
-    // opacity: PropTypes.number,
-    width: PropTypes.number,
-    height: PropTypes.number,
-    fillColor: PropTypes.number,
-    fillAlpha: PropTypes.number,
-    clip: PropTypes.bool,
-  };
-  render() {
     const renderer = core.getRenderer();
     const props = {
       width: renderer.width,
       height: renderer.height,
-      ...this.props,
+      ..._props,
     };
 
-    return React.createElement(RawLayer, props, this.props.children);
-  }
-}
+    layer.setProperties(props);
+  },
+}, propTypes);

@@ -1,7 +1,7 @@
 /**
  * @file        General image component
  * @author      Icemic Jia <bingfeng.web@gmail.com>
- * @copyright   2015-2016 Icemic Jia
+ * @copyright   2015-2017 Icemic Jia
  * @link        https://www.avgjs.org
  * @license     Apache License 2.0
  *
@@ -18,17 +18,16 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import createComponent from 'components/createComponent';
-import ContainerMixin from 'components/ContainerMixin';
-import NodeMixin from 'components/NodeMixin';
+import componentify from '../pixi/componentify';
+import { mountNode, updateNode, setValue, updateValue } from '../pixi/properties';
 import Sprite from 'classes/Sprite';
-import pixiPropTypes from './pixi/propTypes';
-import { mountNode, updateNode, setValue, updateValue } from './pixi/properties';
+import PropTypes from 'prop-types';
 
-const RawImage = createComponent('RawImage', ContainerMixin, NodeMixin, {
+const propTypes = {
+  rectangle: PropTypes.arrayOf(PropTypes.number)
+};
 
+export const Image = componentify('Image', {
   createNode() {
     this.node = new Sprite();
   },
@@ -45,18 +44,5 @@ const RawImage = createComponent('RawImage', ContainerMixin, NodeMixin, {
 
     updateValue.call(node, 'rectangle', prevProps.rectangle, props.rectangle);
     updateNode(node, prevProps, props);
-  },
-
-});
-
-export class Image extends React.PureComponent {
-  static propTypes = {
-    file: PropTypes.string,
-    dataUri: PropTypes.string,
-    rect: PropTypes.arrayOf(PropTypes.number),
-    ...pixiPropTypes,
-  };
-  render() {
-    return React.createElement(RawImage, this.props, this.props.children);
   }
-}
+}, propTypes);

@@ -21,8 +21,15 @@
 import componentify from '../pixi/componentify';
 import { mountNode, updateNode, setValue, updateValue } from '../pixi/properties';
 import RichTextNode from 'pixi-richtext';
+import PropTypes from 'prop-types';
 
-export const RichText =  componentify('RichText', {
+const propTypes = {
+  style: PropTypes.object,
+  layout: PropTypes.object,
+  text: PropTypes.string
+};
+
+export const RichText = componentify('RichText', {
 
   createNode() {
     this.node = new RichTextNode();
@@ -46,4 +53,4 @@ export const RichText =  componentify('RichText', {
     updateNode(node, prevProps, props);
   },
 
-});
+}, propTypes);

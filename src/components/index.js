@@ -18,10 +18,10 @@
  */
 
 export * from 'components/Surface';
-export * from 'components/Image';
+// export * from 'components/Image';
 export * from 'components/Text';
-export * from 'components/Container';
-export * from 'components/Layer';
+// export * from 'components/Container';
+// export * from 'components/Layer';
 export * from 'components/Textwindow';
 export * from 'components/BGImage';
 export * from 'components/FGImage';
@@ -30,3 +30,6 @@ export * from 'components/tween';
 export * from 'components/particle';
 
 export * from './base/RichText';
+export * from './base/Image';
+export * from './base/Container';
+export * from './base/Layer';

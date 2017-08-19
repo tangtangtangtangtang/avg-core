@@ -21,8 +21,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import core from 'core/core';
-import { Layer } from './Layer';
-import { Image } from './Image';
+import { Layer } from './base/Layer';
+import { Image } from './base/Image';
 import { Transition } from 'components/transition';
 import transition from 'plugins/transition';
 

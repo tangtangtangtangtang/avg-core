@@ -15,8 +15,9 @@ module.exports = function (env) {
   if (env.minimize) {
     uglifyPlugin = [new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
+      mangle: true,
       compress: {
-        warnings: true
+        warnings: false
       }
     })];
   } else {
@@ -24,6 +25,7 @@ module.exports = function (env) {
   }
 
   return {
+    cache: true,
     entry: ['babel-polyfill', 'whatwg-fetch', './src/avg.js'],
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -38,7 +40,7 @@ module.exports = function (env) {
     module: {
       rules: [
         { test: /\.js$/, exclude: /node_modules\/(?!(koa-compose|avg-.*|pixi-richtext|huozi))/, loader: 'babel-loader', query: { compact: true } },
-        { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader', query: { compact: true } },
+        { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader', query: { compact: true, cacheDirectory: true } },
         { test: /\.(glsl|frag|vert)$/, loader: 'raw-loader', exclude: /node_modules/ },
       ],
     },

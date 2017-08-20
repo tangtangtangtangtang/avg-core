@@ -3317,9 +3317,9 @@ pixi-particles@^2.1.1:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/pixi-particles/-/pixi-particles-2.1.5.tgz#7b15facd5f532676e1899bd3777e80ddf0e78b93"
 
-pixi-richtext@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/pixi-richtext/-/pixi-richtext-1.0.9.tgz#7a644342ef1de17ce74685141733726ec6bd818c"
+pixi-richtext@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/pixi-richtext/-/pixi-richtext-1.0.11.tgz#81116fe28effd722c70330df4ee295982139f07e"
   dependencies:
     bit-twiddle "^1.0.2"
     color "^2.0.0"

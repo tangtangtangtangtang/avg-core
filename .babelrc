@@ -1,7 +1,10 @@
 {
     "sourceMaps": true,
     "comments": false,
-    "presets": ["latest"],
+    "presets": [["env", {
+        "modules": false,
+        "useBuiltIns": "usage"
+    }]],
     "plugins": ["transform-react-jsx",
                 "transform-decorators-legacy",
                 "transform-class-properties",

@@ -23,6 +23,7 @@
   "dependencies": {
     "avg-storyscript": "^0.2.2",
     "deep-equal": "^1.0.1",
+    "eventemitter3": "^2.0.3",
     "fontfaceobserver": "^2.0.7",
     "howler": "^2.0.2",
     "ismobilejs": "^0.4.0",
@@ -35,7 +36,8 @@
     "raw-loader": "^0.5.1",
     "react": "^15.6.1",
     "react-dom": "^15.4.1",
-    "whatwg-fetch": "^2.0.1"
+    "whatwg-fetch": "^2.0.1",
+    "yoga-layout": "^1.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

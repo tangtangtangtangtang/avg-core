@@ -26,6 +26,7 @@ import { attachToSprite } from 'classes/EventManager';
 import sayHello from 'utils/sayHello';
 import fitWindow from 'utils/fitWindow';
 import Logger from './logger';
+import { EventEmitter } from 'eventemitter3';
 
 import { init as preloaderInit, getTexture, load as loadResources } from './preloader';
 import Ticker from './ticker';
@@ -41,8 +42,9 @@ const logger = Logger.create('Core');
  * @class
  * @memberof AVG
  */
-class Core {
+class Core extends EventEmitter {
   constructor() {
+    super();
 
     /**
      * @type {Boolean}
@@ -139,6 +141,20 @@ class Core {
    */
   installPlugin(constructor) {
     new constructor(this);
+  }
+
+  /**
+   *
+   * install a plugin
+   *
+   * @param {any} name 
+   * @param {any} constructor 
+   * @memberof Core
+   */
+  install(name, constructor) {
+    const instance = new constructor(this);
+
+    this.plugins[name] = instance;
   }
 
   /**

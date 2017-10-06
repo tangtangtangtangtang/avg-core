@@ -22,3 +22,4 @@ export script from 'plugins/script';
 export localStorage from 'plugins/localStorage';
 export Screenshot from 'plugins/screenshot';
 export Audio from 'plugins/audio';
+export FlexLayout from './flexLayout/flexLayout';

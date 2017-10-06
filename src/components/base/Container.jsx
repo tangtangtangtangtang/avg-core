@@ -20,7 +20,7 @@
 
 import componentify from '../pixi/componentify';
 import { mountNode, updateNode, setValue, updateValue } from '../pixi/properties';
-import PixiContainer from 'classes/Sprite';
+import PixiContainer from 'classes/Container';
 import PropTypes from 'prop-types';
 
 const propTypes = {

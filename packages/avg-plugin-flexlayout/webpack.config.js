@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const BitBarWebpackProgressPlugin = require('bitbar-webpack-progress-plugin');
 
 const packageInfo = require('./package.json');
 
@@ -8,7 +7,7 @@ const fs = require('fs');
 const babelOptions = JSON.parse(fs.readFileSync('./.babelrc', 'utf8'));
 
 const license = `/*!
- * @file        AVG.js library
+ * @file        AVG.js Plugin library
  * @author      Icemic Jia <bingfeng.web@gmail.com>
  * @copyright   2015-2017 Icemic Jia
  * @link        https://www.avgjs.org
@@ -50,12 +49,12 @@ module.exports = function (env) {
 
   return {
     cache: true,
-    entry: ['whatwg-fetch', './src/avg.js'],
+    entry: './index.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: `avg${env.minimize ? '.min' : ''}.js`,
+      filename: `index${env.minimize ? '.min' : ''}.js`,
       libraryTarget: 'umd',
-      library: 'AVG',
+      library: 'AVGFlexLayout',
     },
     resolve: {
       extensions: ['.js', '.jsx'],
@@ -65,12 +64,7 @@ module.exports = function (env) {
       rules: [
         { test: /\/yoga-layout\/.*entry-.*\.js$/, loader: 'babel-loader', query: { compact: true, cacheDirectory: true, babelrc: false, ...babelOptions } },
         { test: /\.js$/, exclude: /node_modules\/(?!(koa-compose|avg-.*|pixi-richtext|huozi))/, loader: 'babel-loader', query: { compact: true, cacheDirectory: true } },
-        { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader', query: { compact: true, cacheDirectory: true } },
-        { test: /\.(glsl|frag|vert)$/, loader: 'raw-loader', exclude: /node_modules/ },
       ],
-    },
-    externals: {
-      'pixi.js': 'PIXI'
     },
     devtool: 'source-map',
     plugins: [
@@ -82,8 +76,7 @@ module.exports = function (env) {
         },
       }),
       ...uglifyPlugin,
-      new webpack.BannerPlugin({ banner: license, raw: true }),
-      new BitBarWebpackProgressPlugin(),
+      new webpack.BannerPlugin({ banner: license, raw: true })
     ]
   };
 };

@@ -1,43 +1,27 @@
 {
-  "name": "avg-core",
-  "version": "0.1.1",
-  "description": "Develop Adventure Game (or ADV, Visual Novel, Galgame, etc.) on your own!",
-  "main": "dist/avg.js",
-  "author": "Icemic Jia <bingfeng.web@gmail.com>",
-  "homepage": "https://avgjs.org/",
+  "name": "avg-plugin-flexlayout",
+  "version": "0.0.1",
+  "description": "Flex Layout Plugin for AVG.js",
+  "main": "index.js",
   "scripts": {
     "dev": "webpack --env.development --watch --progress --colors",
     "dist": "webpack --env.release && webpack --env.release --env.minimize",
     "prepublish": "npm run dist",
-    "docs": "esdoc -c esdoc.json",
     "test": "mocha --compilers js:babel-core/register"
   },
-  "keywords": [
-    "Game Engine",
-    "AVG",
-    "Visual Novel",
-    "Galgame",
-    "Game"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avgjs/avg-core.git"
+  },
+  "author": "Icemic Jia <bingfeng.web@gmail.com>",
   "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/avgjs/avg-core/issues"
+  },
+  "homepage": "https://github.com/avgjs/avg-core#readme",
   "dependencies": {
-    "avg-storyscript": "^0.2.2",
-    "deep-equal": "^1.0.1",
-    "eventemitter3": "^2.0.3",
-    "fontfaceobserver": "^2.0.7",
-    "howler": "^2.0.2",
-    "ismobilejs": "^0.4.0",
-    "koa-compose": "^3.2.1",
-    "lodash": "^4.17.4",
-    "pixi-particles": "^2.1.1",
-    "pixi-richtext": "^1.0.11",
-    "pixi.js": "^4.5.4",
-    "prop-types": "^15.5.8",
-    "raw-loader": "^0.5.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.4.1",
-    "whatwg-fetch": "^2.0.1",
-    "yoga-layout": "^1.6.0"
+    "yoga-layout": "^1.6.0",
+    "deep-equal": "^1.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

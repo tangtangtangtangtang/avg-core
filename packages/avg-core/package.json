@@ -36,8 +36,7 @@
     "raw-loader": "^0.5.1",
     "react": "^15.6.1",
     "react-dom": "^15.4.1",
-    "whatwg-fetch": "^2.0.1",
-    "yoga-layout": "^1.6.0"
+    "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

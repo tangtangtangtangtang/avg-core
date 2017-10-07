@@ -63,7 +63,6 @@ module.exports = function (env) {
     },
     module: {
       rules: [
-        { test: /\/yoga-layout\/.*entry-.*\.js$/, loader: 'babel-loader', query: { compact: true, cacheDirectory: true, babelrc: false, ...babelOptions } },
         { test: /\.js$/, exclude: /node_modules\/(?!(koa-compose|avg-.*|pixi-richtext|huozi))/, loader: 'babel-loader', query: { compact: true, cacheDirectory: true } },
         { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader', query: { compact: true, cacheDirectory: true } },
         { test: /\.(glsl|frag|vert)$/, loader: 'raw-loader', exclude: /node_modules/ },

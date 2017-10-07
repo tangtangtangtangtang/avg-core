@@ -48,7 +48,7 @@ module.exports = function (env) {
   }
 
   return {
-    cache: true,
+    // cache: true,
     entry: './index.js',
     output: {
       path: path.resolve(__dirname, 'dist'),

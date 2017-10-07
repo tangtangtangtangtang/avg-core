@@ -1,4 +1,5 @@
-import yoga from 'yoga-layout';
+// import yoga from 'yoga-layout';
+const yoga = require('./lib/entry-browser');
 
 /* eslint-disable */
 

@@ -2,7 +2,7 @@
   "name": "avg-plugin-flexlayout",
   "version": "0.0.1",
   "description": "Flex Layout Plugin for AVG.js",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "webpack --env.development --watch --progress --colors",
     "dist": "webpack --env.release && webpack --env.release --env.minimize",
@@ -20,8 +20,8 @@
   },
   "homepage": "https://github.com/avgjs/avg-core#readme",
   "dependencies": {
-    "yoga-layout": "^1.6.0",
-    "deep-equal": "^1.0.1"
+    "deep-equal": "^1.0.1",
+    "yoga-layout": "^1.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

@@ -1,4 +1,5 @@
-import { Node } from 'yoga-layout';
+// import { Node } from 'yoga-layout';
+const { Node } = require('./lib/entry-browser');
 import { setStyle } from './style';
 
 export default function wrapper(instance) {

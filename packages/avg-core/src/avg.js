@@ -29,6 +29,7 @@ import * as plugins from 'plugins';
 
 import React, { Component } from 'react';
 import core from 'core/core';
+import { define, connect, getEnv } from './core/data';
 import findPixiNode from './components/findPixiNode';
 
 export {
@@ -38,5 +39,8 @@ export {
   components,
   ui,
   plugins,
-  findPixiNode
+  findPixiNode,
+  define,
+  connect,
+  getEnv
 };

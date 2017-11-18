@@ -33,3 +33,4 @@ export * from './base/RichText';
 export * from './base/Image';
 export * from './base/Container';
 export * from './base/Layer';
+export * from './router';

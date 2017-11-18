@@ -30,6 +30,7 @@ import { EventEmitter } from 'eventemitter3';
 
 import { init as preloaderInit, getTexture, load as loadResources } from './preloader';
 import Ticker from './ticker';
+import { define, connect } from './data';
 
 const PIXI = require('pixi.js');
 const isMobile = require('ismobilejs');
@@ -42,6 +43,33 @@ const logger = Logger.create('Core');
  * @class
  * @memberof AVG
  */
+@connect({
+  to: 'core'
+})
+@define({
+  model: {
+    width: 1280,
+    height: 720,
+    isAssetsLoading: false,
+    assetsLoadingProgress: 0,
+    clickEvent: {}
+  },
+  actions: self => ({
+    setScreenSize(width, height) {
+      self.width = width;
+      self.height = height;
+    },
+    setAssetsLoading(value) {
+      self.isAssetsLoading = value;
+    },
+    setAssetsLoadingProgress(value) {
+      self.assetsLoadingProgress = value;
+    },
+    setClickEvent(e) {
+      self.clickEvent = e;
+    }
+  })
+})
 class Core extends EventEmitter {
   constructor() {
     super();
@@ -181,6 +209,10 @@ class Core extends EventEmitter {
       ...options,
     };
 
+    const core = this.data.core;
+
+    core.setScreenSize(width, height);
+
     if (_options.fontFamily) {
       const font = new FontFaceObserver(_options.fontFamily);
 
@@ -225,8 +257,10 @@ class Core extends EventEmitter {
 
     this.stage = new Container();
     attachToSprite(this.stage);
-    this.stage._ontap = e => this.post('tap', e);
-    this.stage._onclick = e => this.post('click', e);
+    // this.stage._ontap = e => this.post('tap', e);
+    // this.stage._onclick = e => this.post('click', e);
+    this.stage._ontap = e => core.setClickEvent(e);
+    this.stage._onclick = e => core.setClickEvent(e);
 
     this.ticker = new Ticker();
     this.ticker.add(this.tick.bind(this));
@@ -267,9 +301,12 @@ class Core extends EventEmitter {
     return Logger.create(name);
   }
 
-  // TODO: need more elegent code
-  loadAssets(list, onProgress) {
-    return loadResources(list, onProgress);
+  // TODO: move to actions
+  async loadAssets(list) {
+    const core = this.data.core;
+    core.setAssetsLoading(true);
+    await loadResources(list, e => core.setAssetsLoadingProgress(e.progress));
+    core.setAssetsLoading(false);
   }
 
   /**

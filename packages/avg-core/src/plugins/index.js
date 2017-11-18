@@ -18,7 +18,7 @@
  */
 
 export Flow from 'plugins/flow';
-export script from 'plugins/script';
+export Script from 'plugins/script';
 export localStorage from 'plugins/localStorage';
 export Screenshot from 'plugins/screenshot';
 export Audio from 'plugins/audio';

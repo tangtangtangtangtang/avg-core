@@ -1,5 +1,5 @@
 /**
- * @file        Main export of the AVG.js library
+ * @file        Text sprite class
  * @author      Icemic Jia <bingfeng.web@gmail.com>
  * @copyright   2015-2016 Icemic Jia
  * @link        https://www.avgjs.org
@@ -18,33 +18,26 @@
  * limitations under the License.
  */
 
-import 'babel-polyfill';
+const PIXI = require('pixi.js');
 
 /**
- * @namespace AVG
+ * Class representing a TextSprite. <br>
+ * default font style is `normal 24px sans-serif`
+ * @extends PIXI.Text
+ * @param {string} text The string that you would like the text to display
+ * @param {object} style The style parameters, see http://pixijs.download/v4.2.3/docs/PIXI.TextStyle.html
  */
-import * as components from 'components';
-import * as ui from 'components/ui';
-import * as plugins from 'plugins';
+class Text extends PIXI.Text {
+  constructor(text = '', style = {}) {
+    super(text, {
+      fontFamily: 'sans-serif',
+      fontSize: 24,
+      fill: 0xffffff,
+      ...style,
+    });
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import core from 'core/core';
-import { define, connect, getEnv } from './core/data';
-import findPixiNode from './components/findPixiNode';
-import tools from './components/componentUtils';
+    this.zorder = 0;
+  }
+}
 
-export {
-  React,
-  Component,
-  PropTypes,
-  core,
-  components,
-  ui,
-  plugins,
-  findPixiNode,
-  define,
-  connect,
-  getEnv,
-  tools,
-};
+module.exports = Text;

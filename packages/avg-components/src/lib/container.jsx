@@ -1,7 +1,7 @@
 /**
- * @file        Main export of the AVG.js library
+ * @file        Container component
  * @author      Icemic Jia <bingfeng.web@gmail.com>
- * @copyright   2015-2016 Icemic Jia
+ * @copyright   2015-2017 Icemic Jia
  * @link        https://www.avgjs.org
  * @license     Apache License 2.0
  *
@@ -18,33 +18,29 @@
  * limitations under the License.
  */
 
-import 'babel-polyfill';
+import { tools, PropTypes } from 'avg-core';
+import PixiContainer from 'class/container';
 
-/**
- * @namespace AVG
- */
-import * as components from 'components';
-import * as ui from 'components/ui';
-import * as plugins from 'plugins';
+const propTypes = {
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import core from 'core/core';
-import { define, connect, getEnv } from './core/data';
-import findPixiNode from './components/findPixiNode';
-import tools from './components/componentUtils';
-
-export {
-  React,
-  Component,
-  PropTypes,
-  core,
-  components,
-  ui,
-  plugins,
-  findPixiNode,
-  define,
-  connect,
-  getEnv,
-  tools,
 };
+
+const Container = tools.componentify('Container', {
+  createNode() {
+    this.node = new PixiContainer();
+  },
+  mountNode(props) {
+    const node = this.node;
+
+    tools.mountNode(node, props);
+
+    return node;
+  },
+  updateNode(prevProps, props) {
+    const node = this.node;
+
+    tools.updateNode(node, prevProps, props);
+  }
+}, propTypes);
+
+export default Container;

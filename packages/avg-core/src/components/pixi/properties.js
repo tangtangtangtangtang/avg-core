@@ -78,8 +78,10 @@ export function setValue(key, value, defaultValue) {
     }
   } else if (key === 'src') {
     node.src = core.getTexture(value);
-  } else {
+  } else if (['position', 'pivot', 'anchor', 'rotation', 'scale', 'skew'].includes(key)) {
     node[key] = convertToPixiValue(value);
+  } else {
+    node[key] = value;
   }
 }
 

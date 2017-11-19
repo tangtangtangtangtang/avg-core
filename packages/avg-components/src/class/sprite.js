@@ -20,6 +20,28 @@
 
 const PIXI = require('pixi.js');
 
+// A monkey patch for transparent video
+PIXI.glCore.GLTexture.prototype.upload = function (source) {
+  this.bind();
+
+  const gl = this.gl;
+
+  gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this.premultiplyAlpha);
+
+  const isVideo = !!source.videoWidth;
+  const newWidth = isVideo ? source.videoWidth : source.width;
+  const newHeight = isVideo ? source.videoHeight : source.height;
+
+  if (newHeight !== this.height || newWidth !== this.width || isVideo) {
+    gl.texImage2D(gl.TEXTURE_2D, 0, this.format, this.format, this.type, source);
+  } else {
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, this.format, this.type, source);
+  }
+
+  this.width = newWidth;
+  this.height = newHeight;
+};
+
 /**
  * Class representing a Sprite.
  * @extends PIXI.Sprite

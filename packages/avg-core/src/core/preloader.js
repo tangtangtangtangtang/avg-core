@@ -28,10 +28,10 @@ let HOST = '/';
 let TRYWEBP = false;
 
 const isSafari = ((navigator.userAgent.indexOf('Safari') !== -1)
-              && (navigator.userAgent.indexOf('Chrome') === -1)
-              && navigator.userAgent.indexOf('Android') === -1)
-              || navigator.userAgent.indexOf('iPhone') !== -1
-              || navigator.userAgent.indexOf('iPad') !== -1;
+  && (navigator.userAgent.indexOf('Chrome') === -1)
+  && navigator.userAgent.indexOf('Android') === -1)
+  || navigator.userAgent.indexOf('iPhone') !== -1
+  || navigator.userAgent.indexOf('iPad') !== -1;
 
 const Resource = PIXI.loaders.Loader.Resource;
 
@@ -109,17 +109,25 @@ export function getTexture(url = '') {
     if (url.startsWith('data:')
       || url.startsWith('http:')
       || url.startsWith('https:')) {
-      obj = PIXI.Texture.fromImage(url);
-    } else {
-      let _url;
-
-      if (url) {
-        _url = (isSafari || !TRYWEBP) ? `${HOST}${url}` : changeExtension(`${HOST}${url}`, 'webp');
+      if (/\.(webm|mp4|mov)$/.test(url)) {
+        obj = PIXI.Texture.fromVideoUrl(url);
       } else {
-        _url = '';
+        obj = PIXI.Texture.fromImage(url);
       }
 
-      obj = PIXI.Texture.fromImage(_url);
+    } else {
+      if (/\.(webm|mp4|mov)$/.test(url)) {
+        obj = PIXI.Texture.fromVideoUrl(`${HOST}${url}`);
+      } else {
+        let _url;
+
+        if (url) {
+          _url = (isSafari || !TRYWEBP) ? `${HOST}${url}` : changeExtension(`${HOST}${url}`, 'webp');
+        } else {
+          _url = '';
+        }
+        obj = PIXI.Texture.fromImage(_url);
+      }
     }
     TEXTURES[url] = obj;
   }

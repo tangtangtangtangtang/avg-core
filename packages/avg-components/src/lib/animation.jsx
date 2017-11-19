@@ -39,6 +39,7 @@ const Animation = tools.componentify('Animation', {
     tools.setValue.call(node, 'onComplete', props.onComplete);
     tools.setValue.call(node, 'onFrameChange', props.onFrameChange);
     tools.setValue.call(node, 'onLoop', props.onLoop);
+    tools.setValue.call(node, 'bounce', props.bounce);
     tools.setValue.call(node, 'isPlaying', props.playing);
 
     tools.mountNode(node, props);
@@ -55,6 +56,7 @@ const Animation = tools.componentify('Animation', {
     tools.updateValue.call(node, 'onComplete', prevProps.onComplete, props.onComplete);
     tools.updateValue.call(node, 'onFrameChange', prevProps.onFrameChange, props.onFrameChange);
     tools.updateValue.call(node, 'onLoop', prevProps.onLoop, props.onLoop);
+    tools.updateValue.call(node, 'bounce', prevProps.bounce, props.bounce);
     tools.updateValue.call(node, 'isPlaying', prevProps.playing, props.playing);
     tools.updateNode(node, prevProps, props);
   }

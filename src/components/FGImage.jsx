@@ -110,11 +110,11 @@ export class FGImage extends React.Component {
       <Transition ref={transLayer => (this.transLayer = transLayer)}>
         <Layer>
           {this.state.center
-            ? <Image src={this.state.center} x={Math.round(width * 0.5)} y={height} anchor={[0.5, 1]} key='center' /> : null}
+            ? <Image width={this.props.width} height={this.props.height} src={this.state.center} x={Math.round(width * 0.5)} y={height} anchor={[0.5, 1]} key='center' /> : null}
           {this.state.left
-            ? <Image src={this.state.left} x={Math.round(width * 0.25)} y={height} anchor={[0.5, 1]} key='left' /> : null}
+            ? <Image width={this.props.width} height={this.props.height} src={this.state.left} x={Math.round(width * 0.25)} y={height} anchor={[0.5, 1]} key='left' /> : null}
           {this.state.right
-            ? <Image src={this.state.right} x={Math.round(width * 0.75)} y={height} anchor={[0.5, 1]} key='right' /> : null}
+            ? <Image width={this.props.width} height={this.props.height} src={this.state.right} x={Math.round(width * 0.75)} y={height} anchor={[0.5, 1]} key='right' /> : null}
         </Layer>
       </Transition>
     );

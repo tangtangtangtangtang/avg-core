@@ -27,6 +27,7 @@ import PixiTextwindow from 'classes/TextWindow';
 import pixiPropTypes from './pixi/propTypes';
 import { Transition } from 'components/transition';
 import transition from 'plugins/transition';
+import { Container } from 'pixi.js'
 
 const RawTextwindow = createComponent('RawTextwindow', ContainerMixin, NodeMixin, {
 
@@ -34,7 +35,7 @@ const RawTextwindow = createComponent('RawTextwindow', ContainerMixin, NodeMixin
     this.node = new PixiTextwindow();
   },
   mountNode(props) {
-     // color, opacity, width, height, x, y, etc.
+    // color, opacity, width, height, x, y, etc.
     const layer = this.node;
 
     props.textRect && layer.setTextRectangle(props.textRect);
@@ -73,7 +74,7 @@ const RawTextwindow = createComponent('RawTextwindow', ContainerMixin, NodeMixin
     layer.x = props.x || 0;
     layer.y = props.y || 0;
 
-  //  layer.setProperties(props);
+    //  layer.setProperties(props);
   },
 
 });

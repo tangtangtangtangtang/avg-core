@@ -1,5 +1,5 @@
 {
-  "name": "avg-core",
+  "name": "avg-core-hackathon",
   "version": "0.1.2",
   "description": "Develop Adventure Game (or ADV, Visual Novel, Galgame, etc.) on your own!",
   "main": "dist/avg.js",

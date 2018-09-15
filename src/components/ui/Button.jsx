@@ -37,7 +37,7 @@ const RawButton = createComponent('RawButton', ContainerMixin, NodeMixin, {
   mountNode(props) {
     // this.setProperties(props);
     const node = this.node;
-
+    alert('mountNode')
     node.buttonMode = true;
     node.on('mouseover', () => this.setFrame(1));
     node.on('mouseout', () => this.setFrame(0));
@@ -66,8 +66,10 @@ const RawButton = createComponent('RawButton', ContainerMixin, NodeMixin, {
   setProperties(props) {
     const layer = this.node;
 
-    layer.x = props.x;
-    layer.y = props.y;
+    layer.x = props.x || props.position[0];
+    layer.y = props.y || props.position[1];
+    layer.width = props.width;
+    layer.height = props.height;
 
     if (props.anchor) {
       layer.anchor = new PIXI.Point(props.anchor[0], props.anchor[1]);

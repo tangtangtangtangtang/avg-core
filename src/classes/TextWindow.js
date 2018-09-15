@@ -64,7 +64,7 @@ export default class TextWindow extends PIXI.Container {
       yInterval: 12,
     };
 
-    this.textSpeed = 20;    // characters per second
+    this.textSpeed = 20; // characters per second
 
     this.textRectangle = [20, 55, 1008, 231];
 
@@ -84,23 +84,23 @@ export default class TextWindow extends PIXI.Container {
     this.addChildAt(this.textSprite, this.children.length);
   }
 
-    /**
-     * Specify index.
-     * @method setIndex
-     * @param {number} index - the id of TextWindow
-     * @returns {TextWindow} - this
-     */
+  /**
+   * Specify index.
+   * @method setIndex
+   * @param {number} index - the id of TextWindow
+   * @returns {TextWindow} - this
+   */
   setIndex(index) {
     this.index = index;
   }
 
-    /**
-     * Specify background image.
-     *   Background can only be image or color, and cannot be both.
-     * @method setBackgroundFile
-     * @param {string} filename
-     * @returns {TextWindow} - this
-     */
+  /**
+   * Specify background image.
+   *   Background can only be image or color, and cannot be both.
+   * @method setBackgroundFile
+   * @param {string} filename
+   * @returns {TextWindow} - this
+   */
   setBackgroundFile(filename) {
     this.removeChild(this.background);
     this.background && this.background.destroy();
@@ -112,20 +112,61 @@ export default class TextWindow extends PIXI.Container {
     }
   }
 
-    /**
-     * Specify background color.
-     *   Background can only be image or color, and cannot be both.
-     * @method setBackgroundColor
-     * @param {string} color
-     * @returns {TextWindow} - this
-     */
+  /**
+   * Specify background image.
+   *   Background can only be image or color, and cannot be both.
+   * @method setBackgroundSize
+   * @param {array} size[width,height]
+   * @returns {TextWindow} - this
+   */
+  setBackgroundSize(size) {
+    let width = size[0],
+      height = size[1]
+    if (!this.background) {
+      return
+    }
+    if (width || height) {
+      this.background.width = width
+      this.background.height = height
+    }
+  }
+  /**
+   * Specify background image.
+   *   Background can only be image or color, and cannot be both.
+   * @method setBackgroundSize
+   * @param {object} transformObject
+   * @returns {TextWindow} - this
+   */
+  setBackgroundTransform(transformObject) {
+    let x = transformObject.x,
+      y = transformObject.y,
+      scaleX = transformObject.scaleX,
+      scaleY = transformObject.scaleY,
+      rotation = transformObject.rotation,
+      skewX = transformObject.skewX,
+      skewY = transformObject.skewY,
+      pivotX = transformObject.pivotX,
+      pivotY = transformObject.pivotY
+    if (!this.background) {
+      return
+    }
+    this.background.setTransform(x, y, scaleX, scaleY, rotation, skewX, skewY, pivotX, pivotY)
+  }
+
+  /**
+   * Specify background color.
+   *   Background can only be image or color, and cannot be both.
+   * @method setBackgroundColor
+   * @param {string} color
+   * @returns {TextWindow} - this
+   */
   setBackgroundColor(color) {
     this.removeChild(this.background);
     this.background && this.background.destroy();
     if (color) {
       this.background = new PIXI.Graphics();
 
-            /* 绘制*/
+      /* 绘制*/
       const rect = this.textRectangle;
 
       this.background.beginFill(color, 1.0).drawRect(rect[0], rect[1], rect[2], rect[3]);
@@ -135,33 +176,33 @@ export default class TextWindow extends PIXI.Container {
     }
   }
 
-    /**
-     * Specify background opacity of the textwindow.
-     * @method setOpacity
-     * @param {number} opacity - value between 0 - 1.0
-     * @returns {TextWindow} - this
-     */
+  /**
+   * Specify background opacity of the textwindow.
+   * @method setOpacity
+   * @param {number} opacity - value between 0 - 1.0
+   * @returns {TextWindow} - this
+   */
   setOpacity(value) {
     (this.background) && (this.background.alpha = value);
   }
 
-    /**
-     * Specify coordinate relative to its parent.
-     * @method setPosition
-     * @param {Array} position - [x, y]
-     * @returns {TextWindow} - this
-     */
+  /**
+   * Specify coordinate relative to its parent.
+   * @method setPosition
+   * @param {Array} position - [x, y]
+   * @returns {TextWindow} - this
+   */
   setPosition(pos) {
     this.x = pos[0];
     this.y = pos[1];
   }
 
-    /**
-     * Specify the area text can be rendered to.
-     * @method setTextRectangle
-     * @param {Array} position - [x, y, width, height]
-     * @returns {TextWindow} - this
-     */
+  /**
+   * Specify the area text can be rendered to.
+   * @method setTextRectangle
+   * @param {Array} position - [x, y, width, height]
+   * @returns {TextWindow} - this
+   */
   setTextRectangle(rect) {
     this.textRectangle = rect;
     this.textSprite.x = this.textRectangle[0];
@@ -169,136 +210,156 @@ export default class TextWindow extends PIXI.Container {
     this.initTextRender(true);
   }
 
-    /**
-     * Specify intervals between letters.
-     * @method setXInterval
-     * @param {number} value, px.
-     * @returns {TextSprite} - this
-     */
+  /**
+   * Specify intervals between letters.
+   * @method setXInterval
+   * @param {number} value, px.
+   * @returns {TextSprite} - this
+   */
   setXInterval(value = 0) {
     this.style.xInterval = value;
   }
 
-    /**
-     * Specify intervals between lines.
-     * @method setYInterval
-     * @param {number} value, px.
-     * @returns {TextSprite} - this
-     */
+  /**
+   * Specify intervals between lines.
+   * @method setYInterval
+   * @param {number} value, px.
+   * @returns {TextSprite} - this
+   */
   setYInterval(value = 12) {
     this.style.yInterval = value;
   }
 
-    /**
-     * Show or hide textwindow.
-     * @method setVisible
-     * @param {boolean} enable if no value passes, it will be a switch.
-     * @returns {TextSprite} - this
-     */
+  /**
+   * Show or hide textwindow.
+   * @method setVisible
+   * @param {boolean} enable if no value passes, it will be a switch.
+   * @returns {TextSprite} - this
+   */
   setVisible(value = false) {
-    if (typeof value === 'undefined') { this.visible = !this.visible; } else { this.visible = !!value; }
+    if (typeof value === 'undefined') {
+      this.visible = !this.visible;
+    } else {
+      this.visible = !!value;
+    }
   }
 
-    /**
-     * @method setTextSize
-     * @param {number} value
-    */
+  /**
+   * @method setTextSize
+   * @param {number} value
+   */
   setTextSize(value = 24) {
     this.style.size = value;
   }
 
-    /**
-     * @method setTextFont
-     * @param {string} name
-    */
+  /**
+   * @method setTextFont
+   * @param {string} name
+   */
   setTextFont(name = 'sans-serif') {
     this.style.font = name;
   }
 
-    /**
-     * @method setTextColor
-     * @param {number} color
-    */
+  /**
+   * @method setTextColor
+   * @param {number} color
+   */
   setTextColor(color = '#ffffff') {
     this.style.color = color;
   }
 
-    /**
-     * @method setTextBold
-     * @param {boolean} value
-    */
+  /**
+   * @method setTextBold
+   * @param {boolean} value
+   */
   setTextBold(bool) {
-    if (typeof bool === 'undefined') { this.style.bold = !this.style.bold; } else { this.style.bold = !!bool; }
+    if (typeof bool === 'undefined') {
+      this.style.bold = !this.style.bold;
+    } else {
+      this.style.bold = !!bool;
+    }
   }
 
-    /**
-     * @method setTextItalic
-     * @param {boolean} enable if no value passes, it will be a switch.
-    */
+  /**
+   * @method setTextItalic
+   * @param {boolean} enable if no value passes, it will be a switch.
+   */
   setTextItalic(bool) {
-    if (typeof bool === 'undefined') { this.style.italic = !this.style.italic; } else { this.style.italic = !!bool; }
+    if (typeof bool === 'undefined') {
+      this.style.italic = !this.style.italic;
+    } else {
+      this.style.italic = !!bool;
+    }
   }
 
-    /**
-     * @method setTextStrike
-     * @param {boolean} enable if no value passes, it will be a switch.
-    */
+  /**
+   * @method setTextStrike
+   * @param {boolean} enable if no value passes, it will be a switch.
+   */
   setTextStrike(bool) {
-    if (typeof bool === 'undefined') { this.style.strike = !this.style.strike; } else { this.style.strike = !!bool; }
+    if (typeof bool === 'undefined') {
+      this.style.strike = !this.style.strike;
+    } else {
+      this.style.strike = !!bool;
+    }
   }
 
-    /**
-     * @method setTextUnderline
-     * @param {boolean} enable if no value passes, it will be a switch.
-    */
+  /**
+   * @method setTextUnderline
+   * @param {boolean} enable if no value passes, it will be a switch.
+   */
   setTextUnderline(bool) {
-    if (typeof bool === 'undefined') { this.style.underline = !this.style.underline; } else { this.style.underline = !!bool; }
+    if (typeof bool === 'undefined') {
+      this.style.underline = !this.style.underline;
+    } else {
+      this.style.underline = !!bool;
+    }
   }
 
-    /**
-     * @method setTextShadow
-     * @param {boolean} enable
-     * @param {string} color
-    */
+  /**
+   * @method setTextShadow
+   * @param {boolean} enable
+   * @param {string} color
+   */
   setTextShadow(bool, color) {
     this.style.shadow = !!bool;
     this.style.shadowColor = color || this.style.shadowColor || '#000000';
   }
 
-    /**
-     * @method setTextStroke
-     * @param {boolean} enable
-     * @param {string} color
-    */
+  /**
+   * @method setTextStroke
+   * @param {boolean} enable
+   * @param {string} color
+   */
   setTextStroke(bool, color) {
     this.style.stroke = !!bool;
     this.style.strokeColor = color || this.style.strokeColor || '#000000';
   }
 
-    /**
-     * Specify the speed of letters printing.
-     * @method setTextSpeed
-     * @param {number} value - letters per second.
-    */
+  /**
+   * Specify the speed of letters printing.
+   * @method setTextSpeed
+   * @param {number} value - letters per second.
+   */
   setTextSpeed(value = 20) {
     this.textSpeed = value;
   }
 
-    /**
-     * Clone a new TextWindow.
-     * @method clone
-     * @returns {TextSprite} - clone object.
-    */
+  /**
+   * Clone a new TextWindow.
+   * @method clone
+   * @returns {TextSprite} - clone object.
+   */
   clone() {
     return clone(this);
   }
 
-    /**
-     * @method setTextCursor
-     * @param {Object.Sprite} sprite
-     * @param {boolean} follow - follow the last letter, or it is fixed.
-     * @param {Array} [position] - must be defined if follow is false.
-     */
+  /**
+   * @method setTextCursor
+   * @param {Object.Sprite} sprite
+   * @param {boolean} follow - follow the last letter, or it is fixed.
+   * @param {Array} [position] - must be defined if follow is false.
+   */
   setTextCursor(sprite, follow, pos) {
     this.textCursor = sprite;
     this.addChildAt(this.textCursor, this.children.length);
@@ -309,12 +370,12 @@ export default class TextWindow extends PIXI.Container {
     }
   }
 
-    /**
-     * Specify the location that the next letter will be printed.
-     * @method relocate
-     * @param {Number} x - x-coordinate, set to null if you don't want to change it.
-     * @param {Number} y - y-coordinate, set to null if you don't want to change it.
-     */
+  /**
+   * Specify the location that the next letter will be printed.
+   * @method relocate
+   * @param {Number} x - x-coordinate, set to null if you don't want to change it.
+   * @param {Number} y - y-coordinate, set to null if you don't want to change it.
+   */
   relocate(x, y) {
     this.m_currentTextWidth = x || this.m_currentTextWidth;
     this.m_currentTextHeight = y || this.m_currentTextHeight;
@@ -325,22 +386,22 @@ export default class TextWindow extends PIXI.Container {
     }
   }
 
-    // text printing
+  // text printing
 
-    /**
-     * switch next new line
-     * @method newline
-     */
+  /**
+   * switch next new line
+   * @method newline
+   */
   newline() {
     this.m_currentTextWidth = 0;
     this.m_currentTextHeight += this.style.size * this.resolution + this.style.yInterval * this.resolution;
   }
 
-    /**
-     * draw text
-     * @method drawText
-     * @param  {String} text what you want to print
-     */
+  /**
+   * draw text
+   * @method drawText
+   * @param  {String} text what you want to print
+   */
   drawText(text, clear = true) {
     if (clear) {
       this.text = text;
@@ -352,10 +413,10 @@ export default class TextWindow extends PIXI.Container {
     return this.wait();
   }
 
-    /**
-     * clear all text in textwindow
-     * @method clearText
-     */
+  /**
+   * clear all text in textwindow
+   * @method clearText
+   */
   clearText() {
     this.textCanvas.width = this.textCanvas.width;
   }
@@ -369,26 +430,31 @@ export default class TextWindow extends PIXI.Container {
     return null;
   }
 
-    /**
-     * called before draw a text
-     * @method initTextRender
-     * @private
-     */
+  /**
+   * called before draw a text
+   * @method initTextRender
+   * @private
+   */
   initTextRender(clear) {
     if (clear) {
       this.textCanvas.width = this.textRectangle[2] * this.resolution;
       this.textCanvas.height = this.textRectangle[3] * this.resolution;
     }
-        // this.textContext.clear();
+    // this.textContext.clear();
 
-        // set text style
-    this.textContext.textBaseline = 'top';
-    {
+    // set text style
+    this.textContext.textBaseline = 'top'; {
       let style = '';
 
-      if (this.style.bold) { style += 'bold '; }
-      if (this.style.italic) { style += 'italic '; }
-      if (!style.length) { style = 'normal '; }
+      if (this.style.bold) {
+        style += 'bold ';
+      }
+      if (this.style.italic) {
+        style += 'italic ';
+      }
+      if (!style.length) {
+        style = 'normal ';
+      }
       this.textContext.font = `${style + this.style.size * this.resolution}px ${this.style.font}`;
     }
     this.textContext.fillStyle = (typeof this.style.color === 'number') ? (`#${this.style.color.toString(16)}`) : this.style.color;
@@ -405,7 +471,7 @@ export default class TextWindow extends PIXI.Container {
       this.textContext.lineWidth = this.style.size * this.resolution / 24;
     }
 
-        // reset status variables
+    // reset status variables
     this.textRendering = true;
     this.m_lastTime = Date.now();
 
@@ -425,16 +491,22 @@ export default class TextWindow extends PIXI.Container {
 
     const delta = Date.now() - this.m_lastTime;
 
-    if (delta < 1000 / this.textSpeed) { return; }
+    if (delta < 1000 / this.textSpeed) {
+      return;
+    }
 
     this.m_lastTime = Date.now();
 
     let count = Math.floor(delta / 1000 * this.textSpeed);
 
-    if (this.textIndex + count >= this.text.length - 1) { count = this.text.length - this.textIndex; }
+    if (this.textIndex + count >= this.text.length - 1) {
+      count = this.text.length - this.textIndex;
+    }
 
-        // hide cursor (if exist)
-    if (this.textCursor) { this.textCursor.visible = false; }
+    // hide cursor (if exist)
+    if (this.textCursor) {
+      this.textCursor.visible = false;
+    }
 
     for (let i = this.textIndex; i < this.textIndex + count; i++) {
       let character;
@@ -453,10 +525,12 @@ export default class TextWindow extends PIXI.Container {
         this.newline();
         continue;
       }
-            // print characters, calculate delta
+      // print characters, calculate delta
       this.textContext.fillText(character, this.m_currentTextWidth, this.m_currentTextHeight);
-      if (this.style.stroke) { this.textContext.strokeText(character, this.m_currentTextWidth, this.m_currentTextHeight); }
-      const width = this.textContext.measureText(character).width;   // 字号已经*this.resolution，无需再乘
+      if (this.style.stroke) {
+        this.textContext.strokeText(character, this.m_currentTextWidth, this.m_currentTextHeight);
+      }
+      const width = this.textContext.measureText(character).width; // 字号已经*this.resolution，无需再乘
 
       this.m_currentTextWidth += width + this.style.xInterval * this.resolution;
       if (this.m_currentTextWidth + width >= this.textRectangle[2] * this.resolution) {
@@ -471,19 +545,21 @@ export default class TextWindow extends PIXI.Container {
 
     super.updateTransform();
 
-        // stop condition
+    // stop condition
     if (this.textIndex >= this.text.length - 1) {
       this.textRendering = false;
       if (this.m_resolve) {
         this.m_resolve();
         this.m_resolve = null;
       }
-            // move cursor (if exist)
+      // move cursor (if exist)
       if (this.textCursor && this.textCursorFollow) {
         this.textCursor.x = this.m_currentTextWidth;
         this.textCursor.y = this.m_currentTextHeight;
       }
-      if (this.textCursor) { this.textCursor.visible = true; } // restore cursor
+      if (this.textCursor) {
+        this.textCursor.visible = true;
+      } // restore cursor
     }
   }
 
@@ -508,9 +584,9 @@ export default class TextWindow extends PIXI.Container {
   wait() {
     if (!this.m_promise) {
       this.m_promise = new Promise((resolve, reject) => {
-        this.m_resolve = resolve;
-      })
-      .then(() => this.m_promise = null);
+          this.m_resolve = resolve;
+        })
+        .then(() => this.m_promise = null);
     }
 
     if (this.visible && this.renderable) {
@@ -538,9 +614,9 @@ export default class TextWindow extends PIXI.Container {
     } catch (e) {}
   }
 
-    // addChild(...args) {
-    //     super.addChild(...args);
-    // }
+  // addChild(...args) {
+  //     super.addChild(...args);
+  // }
 
   destroy() {
     this.background.destroy();

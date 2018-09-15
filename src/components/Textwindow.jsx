@@ -42,6 +42,8 @@ const RawTextwindow = createComponent('RawTextwindow', ContainerMixin, NodeMixin
     props.xInterval != null && layer.setXInterval(props.xInterval);
     props.yInterval != null && layer.setYInterval(props.yInterval);
     props.bgFile && layer.setBackgroundFile(props.bgFile);
+    propos.backgroundSize && layer.setBackgroundSize(props.backgroundSize);
+    props.transform && layer.setBackgroundTransform(props.transform);
     props.opacity != null && layer.setOpacity(props.opacity);
     props.visible != null && layer.setVisible(props.visible);
     props.font && layer.setTextFont(props.font);
@@ -51,8 +53,8 @@ const RawTextwindow = createComponent('RawTextwindow', ContainerMixin, NodeMixin
     props.italic != null && layer.setTextItalic(props.italic);
     props.speed && layer.setTextSpeed(props.speed);
     props.text && layer.drawText(props.text, true);
-    layer.x = props.x || 0;
-    layer.y = props.y || 0;
+    layer.x = props.x || props.position[0] || 0;
+    layer.y = props.y || props.position[1] || 0;
 
     return layer;
   },

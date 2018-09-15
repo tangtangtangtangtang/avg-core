@@ -79,7 +79,7 @@ export class BGImage extends React.Component {
   render() {
     // TODO: It's weired that if you wrap Image with Layer.
     return <Transition ref={transLayer => (this.transLayer = transLayer)}>
-      <Image src={this.state.file || ''} x={0} y={0} />
+      <Image src={this.state.file || ''} x={0} y={0} width={this.props.width} height={this.props.height}/>
     </Transition>;
   }
 }

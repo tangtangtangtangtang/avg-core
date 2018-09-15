@@ -37,7 +37,6 @@ const RawButton = createComponent('RawButton', ContainerMixin, NodeMixin, {
   mountNode(props) {
     // this.setProperties(props);
     const node = this.node;
-    alert('mountNode')
     node.buttonMode = true;
     node.on('mouseover', () => this.setFrame(1));
     node.on('mouseout', () => this.setFrame(0));

@@ -42,7 +42,7 @@ const RawTextwindow = createComponent('RawTextwindow', ContainerMixin, NodeMixin
     props.xInterval != null && layer.setXInterval(props.xInterval);
     props.yInterval != null && layer.setYInterval(props.yInterval);
     props.bgFile && layer.setBackgroundFile(props.bgFile);
-    propos.backgroundSize && layer.setBackgroundSize(props.backgroundSize);
+    props.backgroundSize && layer.setBackgroundSize(props.backgroundSize);
     props.transform && layer.setBackgroundTransform(props.transform);
     props.opacity != null && layer.setOpacity(props.opacity);
     props.visible != null && layer.setVisible(props.visible);
